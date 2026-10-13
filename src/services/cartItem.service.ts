@@ -1,16 +1,10 @@
 import * as cartItemRepository from "../repositories/cartItem.repo.ts";
-
-import type {
-  CreateCartItemType,
-  UpdateCartItemType,
-} from "../types/cartItem.types";
+import type {CreateCartItemType,UpdateCartItemType,} from "../types/cartItem.types";
 
 import Apperror from "../utils/AppError.ts";
 
 // ADD PRODUCT TO CART
-export const createCartItem = async (
-  data: CreateCartItemType
-) => {
+export const createCartItem = async (data: CreateCartItemType) => {
   // Check if product already exists in cart
   const existingItem =
     await cartItemRepository.getCartItemByProduct(
@@ -54,19 +48,14 @@ export const getCartItemById = async (
 };
 
 // GET ITEMS BY CART
-export const getCartItemsByCartId = async (
-  cartId: string
-) => {
+export const getCartItemsByCartId = async (cartId: string) => {
   return cartItemRepository.getCartItemsByCartId(
     cartId
   );
 };
 
 // UPDATE CART ITEM
-export const updateCartItem = async (
-  id: string,
-  data: UpdateCartItemType
-) => {
+export const updateCartItem = async (id: string,data: UpdateCartItemType) => {
   const existingItem =
     await cartItemRepository.getCartItemById(id);
 
@@ -87,9 +76,7 @@ export const updateCartItem = async (
 };
 
 // DELETE CART ITEM
-export const deleteCartItem = async (
-  id: string
-) => {
+export const deleteCartItem = async (id: string) => {
   const existingItem =
     await cartItemRepository.getCartItemById(id);
 

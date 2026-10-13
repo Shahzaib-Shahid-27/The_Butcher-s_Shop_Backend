@@ -1,15 +1,6 @@
 import { Router } from "express";
-
-import {
-  createCategory,
-  getAllCategories,
-  getCategoryById,
-  updateCategory,
-  deleteCategory,
-} from "../controllers/category.controller.ts";
-
+import {createCategory,getAllCategories,getCategoryById,updateCategory,deleteCategory,} from "../controllers/category.controller.ts";
 import { createCategorySchema,updateCategorySchema,categoryIdSchema,} from "../validation/category.validate.ts";
-
 import {validate,validateParams,} from "../middleware/product.middleware.ts";
 
 const router = Router();

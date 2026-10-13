@@ -56,10 +56,7 @@ export const registeruser = async (  name: string,email: string,  password: stri
 
 
 
-export const loginuser = async (
-  email: string,
-  password: string
-) => {
+export const loginuser = async (email: string,password: string) => {
   const checkuser = await authRepository.findUserByEmail(email);
 
   if (!checkuser) {

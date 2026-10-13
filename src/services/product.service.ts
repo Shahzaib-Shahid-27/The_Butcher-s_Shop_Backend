@@ -9,14 +9,12 @@ export const  createProduct = async ( data: CreateProductType ) => {
     return createproduct;
 };
 
-
 export const getAllProducts = async (  ) => {
 
     const createproduct = await productRepository.getAllProducts();
 
     return createproduct;
 };
-
 
 export const getProductById = async ( id:string ) => {
 
@@ -54,7 +52,6 @@ export const updateProduct = async (id: string, data: UpdateProducttype) => {
   return updatedProduct;
 };
 
-
 export const Delproject = async (id: string) => {
   const existingProduct = await productRepository.getProductById(id);
 
@@ -66,5 +63,3 @@ export const Delproject = async (id: string) => {
 
   return existingProduct;
 };
-
-

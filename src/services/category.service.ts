@@ -1,10 +1,6 @@
 
 import * as categoryRepository from "../repositories/category.repos.ts";
-
-import type {
-  CreateCategoryType,
-  UpdateCategoryType,
-} from "../types/category.types";
+import type {CreateCategoryType,UpdateCategoryType,} from "../types/category.types";
 
 import AppError from "../utils/AppError.ts";
 
