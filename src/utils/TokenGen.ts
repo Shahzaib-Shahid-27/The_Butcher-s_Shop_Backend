@@ -31,7 +31,7 @@ const generateRefreshToken = (userId: string) => {
     return JWT.sign(
         { userId  },
         refreshTokenSecret,
-        { expiresIn: '8h' }
+        { expiresIn: '7d' }
     );
 };
 

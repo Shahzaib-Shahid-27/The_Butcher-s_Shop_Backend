@@ -10,6 +10,7 @@ import categoryRoutes from "./routes/category.routes.ts";
 import cartRoutes from "./routes/cart.routes.ts";
 import cartItemRoutes from "./routes/cartItem.routes.ts";
 
+import cookieParser from "cookie-parser";
 
 const app = express();  
 const port = Number(process.env.PORT) || 3000;
@@ -22,12 +23,14 @@ app.use(express.urlencoded({  extended: true }));
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 
+app.use(cookieParser());
 //router
 app.use('/api/v1/auth',authRouter);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/categories",categoryRoutes);
 app.use("/api/v1/carts",cartRoutes);
 app.use("/api/v1/cart-items",cartItemRoutes);
+
 
 app.get('/health', (req: Request, res: Response) => {
     res.status(200).json({ 

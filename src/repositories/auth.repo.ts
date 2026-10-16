@@ -1,14 +1,14 @@
 import { db } from "../prisma/db.ts";
 
-export const createuser = async (name: string,email: string,password: string) => {
+export const createuser = async (name: string,email: string,password: string,googleId?: string) => {
   return await db.orm.public.User.create({
     name,
     email,
     password,
+     ...(googleId ? { googleId } : {}),
     expiresAt: new Date().toISOString(),
   });
 };
-
 
 export const findUserByEmail = async (email: string) => {
   const users = await db.orm.public.User
@@ -17,7 +17,6 @@ export const findUserByEmail = async (email: string) => {
 
   return users[0] ?? null;
 };
-
 
 export const findUserById = async (userid: string) => {
   return await db.orm.public.User
@@ -47,4 +46,22 @@ export const findUserByRefreshToken = async (refreshToken: string) => {
   return await db.orm.public.User
     .where({ refreshToken })
     .first();
+};
+
+export const createGoogleUser = async ( name: string,email: string,googleId: string,avatar: string | null ) => {
+    return await db.orm.public.User.create({
+  name, email, googleId, avatar, expiresAt: new Date().toISOString()
+    })
+};
+
+export const linkGoogleAccount = async (id: string, googleId: string, avatar: string | null) => {
+  return await db.orm.public.User
+    .where({ id })
+    .update({ googleId, ...(avatar ? { avatar } : {}) });
+};
+
+export const findUserByGoogleId = async ( googleId: string) => {
+  return await db.orm.public.User
+  .where({ googleId })
+  .first();
 };
