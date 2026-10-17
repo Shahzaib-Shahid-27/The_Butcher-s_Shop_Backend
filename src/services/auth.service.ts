@@ -53,14 +53,20 @@ export const registeruser = async (  name: string,email: string,  password: stri
     getRefreshTokenExpiry()
   );
 
-   const safeUser = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-    };
+   
+  const safeUser = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
 
   return {
     user: safeUser,
+    tokens: {
+      accessToken,
+      refreshToken,
+    },
   };
 };
 

@@ -32,7 +32,7 @@ const generateRefreshToken = (userId: string) => {
     return JWT.sign(
         { userId  },
         refreshTokenSecret,
-        { expiresIn: '7d' }
+        { expiresIn: '1h' }
     );
 };
 
