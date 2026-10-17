@@ -30,7 +30,9 @@ export const createProduct = async (data: CreateProductType) => {
 
 // GET ALL PRODUCTS
 export const getAllProducts = async () => {
-  return db.orm.public.Product.all();
+  return  db.orm.public.Product
+    .where({ isActive: true })
+    .all();
 };
 
 
@@ -58,4 +60,10 @@ export const deleteProduct = async (id: string) => {
   return db.orm.public.Product
     .where({ id })
     .delete();
+};
+
+
+// All products for the admin panel
+export const getAllProductsForAdmin = async () => {
+  return db.orm.public.Product.all();
 };

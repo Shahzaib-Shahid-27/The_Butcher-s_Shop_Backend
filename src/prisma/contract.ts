@@ -20,6 +20,9 @@ export const contract = defineContract({}, ({ field, model }) => {
       expiresAt: field.text(),
       createdAt: field.temporal.createdAtString(),
       updatedAt: field.temporal.updatedAt(),
+
+      role: field.text().default("USER"),
+      isActive: field.boolean().default(true),
     },
   });
 

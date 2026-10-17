@@ -1,14 +1,15 @@
 import JWT from 'jsonwebtoken';
 
 declare global {
-    namespace Express {
-        interface Request {
-            user?: {
-                userId: string;
-                exp?: number;
-            };
-        }
+  namespace Express {
+    interface Request {
+      user?: {
+        userId: string;
+        role: string;
+        exp?: number;
+      };
     }
+  }
 }
 
 // Ensure secrets are defined

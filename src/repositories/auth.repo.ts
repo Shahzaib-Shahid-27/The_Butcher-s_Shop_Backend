@@ -19,9 +19,20 @@ export const findUserByEmail = async (email: string) => {
 };
 
 export const findUserById = async (userid: string) => {
-  return await db.orm.public.User
+  const user = await db.orm.public.User
     .where({ id: userid })
     .first();
+
+  if (!user) {
+    return null;
+  }
+
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
 };
 
 export const updatePassword = async (id: string,password: string) => {

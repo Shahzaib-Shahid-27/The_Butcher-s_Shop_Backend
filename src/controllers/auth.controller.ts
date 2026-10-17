@@ -115,15 +115,9 @@ export const resetPassword = async (  req: Request,  res: Response) => {
 
     const user = await authService.getProfile( userId );
 
-   return res.status(200).json({
+   res.status(200).json({
       success: true,
-      data: {
-        user: {
-          id: userId,
-          name: user.user.name,
-          email: user.user.email,
-        },
-      },
+      data: { user },
     });
   }
 

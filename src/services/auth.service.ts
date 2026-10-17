@@ -106,14 +106,13 @@ export const loginuser = async (email: string,password: string) => {
     getRefreshTokenExpiry()
   );
 
-  const safeUser = {
-    id: checkuser.id,
-    name: checkuser.name,
-    email: checkuser.email,
-  };
-
-  return {
-    user: safeUser,
+    return {
+    user: {
+      id: checkuser.id,
+      name: checkuser.name,
+      email: checkuser.email,
+      role: checkuser.role,
+    },
     tokens: {
       accessToken,
       refreshToken,
@@ -164,24 +163,20 @@ export const resetPassword = async ( email: string,newPassword: string) => {
   return true;
 };
 
-export const getProfile = async( userId: string ) => {
-    
-    const user = await authRepository.findUserById(userId);
+export const getProfile = async (userId: string) => {
+  const user = await authRepository.findUserById(userId);
 
-    if(!user){
-        throw new AppError("User not found.", 404);
-    }
-
-    const safeUser = {
-        name: user.name,
-        email: user.email,
-    };
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
 
   return {
-    user: safeUser,
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
   };
-    
-}
+};
 
 export const refreshAccessToken = async ( refreshToken: string ) => {
 

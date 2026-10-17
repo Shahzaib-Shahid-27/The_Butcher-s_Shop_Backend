@@ -1,23 +1,24 @@
 import { Router } from "express";
-import {createCategory,getAllCategories,getCategoryById,updateCategory,deleteCategory,} from "../controllers/category.controller.ts";
-import { createCategorySchema,updateCategorySchema,categoryIdSchema,} from "../validation/category.validate.ts";
-import {validate,validateParams,} from "../middleware/product.middleware.ts";
+import {
+  createCategory,
+  getAllCategories,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+} from "../controllers/category.controller.js";
+
+import { verifyJWT } from "../middleware/auth.middleware.js";
+import { authorizeAdmin } from "../middleware/authorizeRole.js";
 
 const router = Router();
 
-// CREATE
-router.post("/",validate(createCategorySchema),createCategory);
+// Anyone can view categories
+router.get("/", getAllCategories);
+router.get("/:id", getCategoryById);
 
-// GET ALL
-router.get("/",getAllCategories);
-
-// GET BY ID
-router.get("/:id",validateParams(categoryIdSchema),getCategoryById);
-
-// UPDATE
-router.patch("/:id",validateParams(categoryIdSchema),validate(updateCategorySchema),updateCategory);
-
-// DELETE
-router.delete("/:id",validateParams(categoryIdSchema),  deleteCategory);
+// Only authenticated admins can modify categories
+router.post("/", verifyJWT, authorizeAdmin, createCategory);
+router.patch("/:id", verifyJWT, authorizeAdmin, updateCategory);
+router.delete("/:id", verifyJWT, authorizeAdmin, deleteCategory);
 
 export default router;

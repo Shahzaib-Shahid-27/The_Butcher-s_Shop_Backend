@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'7837b8be4ca2e287b185bc0e02f662ddcbe2486cd93c7b83f8381c3b244116a8'>;
+  StorageHashBase<'7a1e2108f60a8bf5c9ce99be300b93c421abf4a8f8b5908b9f88b2fbd78084a4'>;
 export type ExecutionHash =
   ExecutionHashBase<'0a5d273f2a804b4cf8d58f44f556099cf0fe05515ab7652d1dd19f402c8bd689'>;
 export type ProfileHash =
@@ -292,9 +292,11 @@ export type FieldOutputTypes = {
       readonly expiresAt: CodecTypes['pg/text@1']['output'];
       readonly googleId: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/uuid@1']['output'];
+      readonly isActive: CodecTypes['pg/bool@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly password: CodecTypes['pg/text@1']['output'] | null;
       readonly refreshToken: CodecTypes['pg/text@1']['output'] | null;
+      readonly role: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
   };
@@ -343,9 +345,11 @@ export type FieldInputTypes = {
       readonly expiresAt: CodecTypes['pg/text@1']['input'];
       readonly googleId: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/uuid@1']['input'];
+      readonly isActive: CodecTypes['pg/bool@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly password: CodecTypes['pg/text@1']['input'] | null;
       readonly refreshToken: CodecTypes['pg/text@1']['input'] | null;
+      readonly role: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
   };
@@ -394,9 +398,11 @@ export type StorageColumnTypes = {
       readonly expiresAt: CodecTypes['pg/text@1']['output'];
       readonly googleId: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/uuid@1']['output'];
+      readonly isActive: CodecTypes['pg/bool@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly password: CodecTypes['pg/text@1']['output'] | null;
       readonly refreshToken: CodecTypes['pg/text@1']['output'] | null;
+      readonly role: CodecTypes['pg/text@1']['output'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
   };
@@ -445,9 +451,11 @@ export type StorageColumnInputTypes = {
       readonly expiresAt: CodecTypes['pg/text@1']['input'];
       readonly googleId: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/uuid@1']['input'];
+      readonly isActive: CodecTypes['pg/bool@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly password: CodecTypes['pg/text@1']['input'] | null;
       readonly refreshToken: CodecTypes['pg/text@1']['input'] | null;
+      readonly role: CodecTypes['pg/text@1']['input'];
       readonly updatedAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
   };
@@ -507,9 +515,11 @@ export namespace Models {
     expiresAt: CodecTypes['pg/text@1']['output'];
     googleId: CodecTypes['pg/text@1']['output'] | null;
     id: CodecTypes['pg/uuid@1']['output'];
+    isActive: CodecTypes['pg/bool@1']['output'];
     name: CodecTypes['pg/text@1']['output'];
     password: CodecTypes['pg/text@1']['output'] | null;
     refreshToken: CodecTypes['pg/text@1']['output'] | null;
+    role: CodecTypes['pg/text@1']['output'];
     updatedAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     cart: public_Cart | null;
     readonly [RelationKeys]?: 'cart';
@@ -759,6 +769,15 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/uuid@1';
                   readonly nullable: false;
                 };
+                readonly isActive: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/bool@1', true>;
+                  };
+                };
                 readonly name: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
@@ -773,6 +792,15 @@ type ContractBase = Omit<
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
+                };
+                readonly role: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/text@1', 'USER'>;
+                  };
                 };
                 readonly updatedAt: {
                   readonly nativeType: 'timestamptz';
@@ -1120,6 +1148,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/uuid@1' };
               };
+              readonly isActive: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
               readonly name: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -1130,6 +1162,10 @@ type ContractBase = Omit<
               };
               readonly refreshToken: {
                 readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly role: {
+                readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
               readonly updatedAt: {
@@ -1161,9 +1197,11 @@ type ContractBase = Omit<
                 readonly expiresAt: { readonly column: 'expiresAt' };
                 readonly googleId: { readonly column: 'googleId' };
                 readonly id: { readonly column: 'id' };
+                readonly isActive: { readonly column: 'isActive' };
                 readonly name: { readonly column: 'name' };
                 readonly password: { readonly column: 'password' };
                 readonly refreshToken: { readonly column: 'refreshToken' };
+                readonly role: { readonly column: 'role' };
                 readonly updatedAt: { readonly column: 'updatedAt' };
               };
             };
