@@ -58,7 +58,7 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Backend is running on this server!");
+    res.send("The Bucther's Shop server is running");
 });
 
 app.use(errorHandler);
