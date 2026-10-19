@@ -20,7 +20,25 @@ const port = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({  extended: true }));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://the-butcher-s-shop-frontend.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests without an Origin header, such as some API tools.
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked origin: ${origin}`));
+      }
+    },
+    credentials: true,
+  })
+);
 
 
 app.use(cookieParser());
