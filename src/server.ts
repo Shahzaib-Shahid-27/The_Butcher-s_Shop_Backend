@@ -1,6 +1,5 @@
 import "dotenv/config";
 import express, { type Request, type Response } from "express";
-
 import cors from "cors";
 import { db } from "./prisma/db.ts";
 import { authRouter } from "./routes/auth.route.ts";
@@ -9,7 +8,6 @@ import { errorHandler } from "./middleware/error.middleware.ts";
 import categoryRoutes from "./routes/category.routes.ts";
 import cartRoutes from "./routes/cart.routes.ts";
 import cartItemRoutes from "./routes/cartItem.routes.ts";
-
 import cookieParser from "cookie-parser";
 
 const app = express();  
