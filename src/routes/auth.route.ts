@@ -11,13 +11,7 @@ authRouter.post("/forgot-password", asyncHandler(authController.forgotPassword))
 authRouter.post("/reset-password", asyncHandler(authController.resetPassword));
 authRouter.post("/refresh", asyncHandler(authController.refreshToken));
 authRouter.post("/logout", verifyJWT, asyncHandler(authController.logout));
-authRouter.get(
-	"/get-profile",
-	verifyJWT,
-	asyncHandler(async (req, res) => {
-		await authController.getProfile(req, res);
-	}),
-);
+authRouter.get("/get-profile",verifyJWT,asyncHandler(async (req, res) => {await authController.getProfile(req, res);}),);
 authRouter.get("/google", asyncHandler(authController.googleRedirect));
 authRouter.get("/google/callback", asyncHandler(authController.googleCallback));
 
