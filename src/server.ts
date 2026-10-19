@@ -18,9 +18,6 @@ const port = Number(process.env.PORT) || 3000;
 
 // Middleware 
 
-app.use(express.json());
-app.use(express.urlencoded({  extended: true }));
-
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
@@ -47,7 +44,11 @@ app.use(
 );
 
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
 //router
 app.use('/api/v1/auth',authRouter);
 app.use("/api/v1/products", productRoutes);
