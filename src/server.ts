@@ -58,7 +58,7 @@ app.get('/health', (req: Request, res: Response) => {
 });
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("The Bucther's Shop server is running");
+    res.send("The Buther's Shop server is running");
 });
 
 app.use(errorHandler);
