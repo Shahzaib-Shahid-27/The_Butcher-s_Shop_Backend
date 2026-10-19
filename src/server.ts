@@ -71,7 +71,7 @@ const startserver  = async  () => {
         await db.connect();
 
         app.listen(port, "0.0.0.0", async () => {
-            console.log(`\nBackend server is running on port ${port} \n DataBase Connected Successfully...\n`);
+            console.log(`\n The Bucther's Shop server is running on port ${port} \n DataBase Connected Successfully...\n`);
         });
 
     }catch(error){
