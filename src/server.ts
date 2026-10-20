@@ -11,7 +11,7 @@
     import cookieParser from "cookie-parser";
 
     const app = express();  
-    const port = Number(process.env.PORT) || 3000;
+    const port = Number(process.env.PORT) || 8000;
 
 
     const allowedOrigins = [
