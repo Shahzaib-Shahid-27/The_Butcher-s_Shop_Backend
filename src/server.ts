@@ -14,27 +14,27 @@
     const port = Number(process.env.PORT) || 3000;
 
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://the-butcher-s-shop-frontend.vercel.app",
-  "https://the-butcher-s-shop-frontend-lq79akg0p.vercel.app",
-];
+    const allowedOrigins = [
+    "http://localhost:5173",
+    "https://the-butcher-shop-frontend.vercel.app",
+    process.env.FRONTEND_URL,
+    ].filter((origin): origin is string => Boolean(origin));
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+    app.use(
+    cors({
+        origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
 
-      console.error("Blocked by CORS:", origin);
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+        console.error("Blocked by CORS:", origin);
+        return callback(new Error("Not allowed by CORS"));
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+    })
+    );
 
 
 
