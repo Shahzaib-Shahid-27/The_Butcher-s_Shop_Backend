@@ -3,12 +3,12 @@
   import * as authService from "../services/auth.service.js";
   import AppError from "../utils/AppError.js";
 
-const refreshCookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax" as const,
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-};
+  const refreshCookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax" as const,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  };
 
   export const register = async ( req:Request,res:Response) => {
 
